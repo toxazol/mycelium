@@ -1,39 +1,89 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mycelium : MonoBehaviour
 {
-    public float segLen = 1.0F;
-    public float wiggleRange = 0.5f;
-
-    public float branchProb = 0.99f;
+    public float segLen = 0.1F;
+    public float wiggleRange = 0.3f;
+    public float branchProb = 0.03f;
+    public int branchPointLimit = 50;
+    public int maxRelationDepth = 4;
+    public Vector3 dir = Vector2.down;
+    public int branchDepth = 0;
+    public float growInterval = 0.1f;
 
     LineRenderer lineRenderer;
-    Vector2 curVec;
+
+    float timeSinceLastGrow;
     
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        curVec = Vector2.up;
+        // Random.InitState(System.Guid.NewGuid().GetHashCode());
     }
 
-    void Update()
+    void Update() 
     {
-        curVec = Wiggle(curVec);
+        timeSinceLastGrow += Time.deltaTime;
+        if(timeSinceLastGrow < growInterval) {
+            return;
+        }
+        timeSinceLastGrow = 0;
+        dir = Wiggle(dir);
+        Vector3 newPoint = GetLastPos() + dir * segLen;
+        lineRenderer.SetPosition(lineRenderer.positionCount++,  newPoint);
+        
+        if(lineRenderer.positionCount + 1 > branchPointLimit) {
+            Branch();
+            this.enabled = false;
+            return;
+        }
 
-        var lastPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-        Vector3 newDir = curVec * segLen;
-        lineRenderer.SetPosition(lineRenderer.positionCount++, lastPoint + newDir);
-        // branching recursion
-        if(Random.value < branchProb) return; //it's frame and seglen dependent which is bad
-        Instantiate(this.gameObject, this.transform);
-
+        if(Random.value < branchProb) {
+            Branch();
+        }
     }
 
-    Vector2 Wiggle(Vector2 vec) {
+    void Branch() 
+    {
+        if(branchDepth + 1 > maxRelationDepth) {
+            return;
+        }
+
+        var branch = new GameObject("branch");
+        branch.transform.parent = this.transform;
+        var branchScript = (Mycelium) CopyComponent(this, branch); // to copy script properties like branchProb, etc
+        var branchLine = branch.AddComponent<LineRenderer>();
+        branchLine.startWidth = lineRenderer.startWidth;
+        branchLine.positionCount = 0; // new lineRenderer starts with 2 default points
+        branchLine.SetPosition(branchLine.positionCount++,  GetLastPos());
+        branchLine.material = lineRenderer.material;
+        branchScript.dir = dir;
+        branchScript.branchDepth = branchDepth + 1;
+    
+    }
+
+    Vector2 Wiggle(Vector2 vec) 
+    {
         vec.x += Random.Range(-wiggleRange, wiggleRange);
         vec.y += Random.Range(-wiggleRange, wiggleRange);
         return vec.normalized;
+    }
+
+    Vector3 GetLastPos() 
+    {
+        return lineRenderer.GetPosition(lineRenderer.positionCount - 1);
+    }
+
+    Component CopyComponent(Component original, GameObject destination)
+    {
+        System.Type type = original.GetType();
+        Component copy = destination.AddComponent(type);
+        // Copied fields can be restricted with BindingFlags
+        System.Reflection.FieldInfo[] fields = type.GetFields(); 
+        foreach (System.Reflection.FieldInfo field in fields)
+        {
+            field.SetValue(copy, field.GetValue(original));
+        }
+        return copy;
     }
 }
