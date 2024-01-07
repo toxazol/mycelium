@@ -388,7 +388,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -475,14 +475,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7317f04ceac56747af51bec8a5854ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segLen: 0.1
+  segLen: 0.07
   wiggleRange: 0.2
-  branchProb: 0.1
-  branchPointLimit: 20
+  branchProb: 0.5
+  branchPointLimit: 10
   maxRelationDepth: 4
-  dir: {x: -1, y: -1, z: 0}
+  dir: {x: 0, y: 1, z: 0}
   branchDepth: 0
-  growInterval: 0.1
+  growInterval: 0.05
+  widthMul: 0.5
 --- !u!4 &7158799980500300672
 Transform:
   m_ObjectHideFlags: 0

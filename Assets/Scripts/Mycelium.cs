@@ -10,6 +10,7 @@ public class Mycelium : MonoBehaviour
     public Vector3 dir = Vector2.down;
     public int branchDepth = 0;
     public float growInterval = 0.1f;
+    public float widthMul = 0.8f;
 
     LineRenderer lineRenderer;
 
@@ -28,7 +29,7 @@ public class Mycelium : MonoBehaviour
             return;
         }
         timeSinceLastGrow = 0;
-        dir = Wiggle(dir);
+        dir = Wiggle(dir, wiggleRange);
         Vector3 newPoint = GetLastPos() + dir * segLen;
         lineRenderer.SetPosition(lineRenderer.positionCount++,  newPoint);
         
@@ -38,7 +39,9 @@ public class Mycelium : MonoBehaviour
             return;
         }
 
-        if(Random.value < branchProb) {
+        // Decrease branch probability with depth
+        float adjustedBranchProb = Mathf.Clamp(branchProb / (branchDepth + 1), 0, branchProb);
+        if(Random.value < adjustedBranchProb) {
             Branch();
         }
     }
@@ -53,19 +56,19 @@ public class Mycelium : MonoBehaviour
         branch.transform.parent = this.transform;
         var branchScript = (Mycelium) CopyComponent(this, branch); // to copy script properties like branchProb, etc
         var branchLine = branch.AddComponent<LineRenderer>();
-        branchLine.startWidth = lineRenderer.startWidth;
+        branchLine.startWidth = lineRenderer.startWidth * widthMul;
         branchLine.positionCount = 0; // new lineRenderer starts with 2 default points
         branchLine.SetPosition(branchLine.positionCount++,  GetLastPos());
         branchLine.material = lineRenderer.material;
-        branchScript.dir = dir;
+        // branchScript.dir = Wiggle(dir, wiggleRange*2); // wiggle some more when branch
         branchScript.branchDepth = branchDepth + 1;
     
     }
 
-    Vector2 Wiggle(Vector2 vec) 
+    Vector2 Wiggle(Vector2 vec, float range) 
     {
-        vec.x += Random.Range(-wiggleRange, wiggleRange);
-        vec.y += Random.Range(-wiggleRange, wiggleRange);
+        vec.x += Random.Range(-range, range);
+        vec.y += Random.Range(-range, range);
         return vec.normalized;
     }
 
