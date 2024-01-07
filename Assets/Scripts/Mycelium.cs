@@ -3,7 +3,7 @@ using UnityEngine;
 public class Mycelium : MonoBehaviour
 {
     public float segLen = 0.1F;
-    public float wiggleRange = 0.3f;
+    public float wiggleRangeRad = 1.5f; // +/- 90 deg
     public float branchProb = 0.03f;
     public int branchPointLimit = 50;
     public int maxRelationDepth = 4;
@@ -13,13 +13,18 @@ public class Mycelium : MonoBehaviour
     public float widthMul = 0.8f;
 
     LineRenderer lineRenderer;
-
     float timeSinceLastGrow;
+    Player player;
+
+    float segLenSq;
     
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        // Random.InitState(System.Guid.NewGuid().GetHashCode());
+        if(branchDepth == 0) { // main branch
+            player = GameObject.FindObjectOfType<Player>();
+            segLenSq = segLen * segLen;
+        }
     }
 
     void Update() 
@@ -29,11 +34,22 @@ public class Mycelium : MonoBehaviour
             return;
         }
         timeSinceLastGrow = 0;
-        dir = Wiggle(dir, wiggleRange);
+        if(branchDepth > 0) {
+            dir = Wiggle(dir, wiggleRangeRad);
+        } else {
+            dir = player.transform.position - GetLastPos();
+            // don't grow or branch if reached player
+            if(dir.sqrMagnitude < segLenSq) {
+                return;
+            }
+            dir = dir.normalized;
+        }
+        
         Vector3 newPoint = GetLastPos() + dir * segLen;
         lineRenderer.SetPosition(lineRenderer.positionCount++,  newPoint);
         
-        if(lineRenderer.positionCount + 1 > branchPointLimit) {
+        // limit secondary branch length
+        if(branchDepth > 0 && lineRenderer.positionCount + 1 > branchPointLimit) {
             Branch();
             this.enabled = false;
             return;
@@ -67,9 +83,11 @@ public class Mycelium : MonoBehaviour
 
     Vector2 Wiggle(Vector2 vec, float range) 
     {
-        vec.x += Random.Range(-range, range);
-        vec.y += Random.Range(-range, range);
-        return vec.normalized;
+        var randRad = Random.Range(-range, range);
+        var newX = vec.x * Mathf.Cos(randRad) - vec.y * Mathf.Sin(randRad);
+        var newY = vec.x * Mathf.Sin(randRad) + vec.y * Mathf.Cos(randRad);
+
+        return new Vector2(newX, newY);
     }
 
     Vector3 GetLastPos() 
