@@ -76,6 +76,7 @@ public class Mycelium : MonoBehaviour
         branchLine.positionCount = 0; // new lineRenderer starts with 2 default points
         branchLine.SetPosition(branchLine.positionCount++,  GetLastPos());
         branchLine.material = lineRenderer.material;
+        branchLine.colorGradient = lineRenderer.colorGradient;
         // branchScript.dir = Wiggle(dir, wiggleRange*2); // wiggle some more when branch
         branchScript.branchDepth = branchDepth + 1;
     
