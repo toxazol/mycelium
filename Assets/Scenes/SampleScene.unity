@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpVec: {x: -3, y: 5}
-  jumpInterval: 0.5
+  jumpInterval: 0.75
 --- !u!4 &194920068
 Transform:
   m_ObjectHideFlags: 0
