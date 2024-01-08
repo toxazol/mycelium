@@ -44,3 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Trees
+    uniqueID: 1478533575
+    locked: 0
+  - name: Tiles
+    uniqueID: 2992993971
+    locked: 0
+  - name: Characters
+    uniqueID: 3990987365
+    locked: 0
