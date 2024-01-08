@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8760fed2952aec945a1cd83b71dbec23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpVec: {x: -3, y: 3}
+  jumpVec: {x: -3, y: 5}
   jumpInterval: 0.5
 --- !u!4 &194920068
 Transform:
@@ -15078,7 +15078,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945041988}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
