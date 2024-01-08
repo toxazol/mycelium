@@ -50,11 +50,11 @@ TagManager:
   - name: CaveBG
     uniqueID: 747905253
     locked: 0
-  - name: Trees
-    uniqueID: 1478533575
-    locked: 0
   - name: SkyBG
     uniqueID: 3225145031
+    locked: 0
+  - name: Trees
+    uniqueID: 1478533575
     locked: 0
   - name: Tiles
     uniqueID: 2992993971
