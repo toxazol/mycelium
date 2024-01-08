@@ -2,19 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
 
     public InputAction move;
     public InputAction interact;
+    public InputAction pause;
     public bool isMoving = false;
     public float moveSpeed = 5f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D moveFilter;
-
+    public GameObject menuUI;
+    private bool isPaused = false; 
     private Rigidbody2D rb;
-    private List<RaycastHit2D> castCollisions = new();
+    public List<RaycastHit2D> castCollisions = new();
+    
+
+    public void Awake()
+    {
+        // assign a callback for the "pause" action.
+        pause.performed += ctx => { OnPause(); };
+    }
+
+    public void OnPause() 
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0.0f : 1.0f;
+        menuUI.SetActive(isPaused);
+    }
+
+    public void OnNewGame()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -62,6 +85,7 @@ public class Player : MonoBehaviour
     {
         move.Enable();
         interact.Enable();
+        pause.Enable();
     }
 
     public void OnDisable()
