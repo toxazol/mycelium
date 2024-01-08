@@ -47,6 +47,9 @@ TagManager:
   - name: Trees
     uniqueID: 1478533575
     locked: 0
+  - name: Mycelium
+    uniqueID: 23260857
+    locked: 0
   - name: Tiles
     uniqueID: 2992993971
     locked: 0
