@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private bool isPaused = false; 
     private Rigidbody2D rb;
     public List<RaycastHit2D> castCollisions = new();
+    public List<GameObject> dinoFood;
+    public float foodOffsetUp = 0.1f;
+
     
 
     public void Awake()
@@ -37,6 +40,19 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnGrow()
+    {
+        if(TryMove(Vector2.up, true)) {
+            return;
+        }
+        int i = Random.Range(0, dinoFood.Count);
+        var foodPos = new Vector3(
+            this.transform.position.x, 
+            this.transform.position.y + foodOffsetUp, 
+            this.transform.position.z);
+        GameObject.Instantiate(dinoFood[i], foodPos, Quaternion.identity);
     }
     
     // Start is called before the first frame update
@@ -65,7 +81,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    bool TryMove(Vector2 dir)
+    bool TryMove(Vector2 dir, bool checkOnly = false)
     {
         if (dir == Vector2.zero) return false;
 
@@ -77,7 +93,9 @@ public class Player : MonoBehaviour
 
         if (collisionCount > 0) return false;
 
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * dir);
+        if(!checkOnly) {
+            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * dir);
+        }
         return true;
     }
 
