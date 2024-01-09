@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Dino : MonoBehaviour
     public float jumpInterval; 
     public DetectionZone foodDetectionZone;
     public GameObject chasedObj;
+    public float reachedRadius = 0.3f;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -30,14 +32,15 @@ public class Dino : MonoBehaviour
 
     void FixedUpdate() 
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attention"))
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attention")
+            || animator.GetBool("isEating"))
         {
-            Debug.Log("Dino noticed something!");
+            // wait for dino to notice or to eat
             return;
         }
         if(chasedObj) 
         {
-            JumpTo(chasedObj.transform.position);
+            JumpTo(chasedObj.transform.position, Eat);
         } 
         else if(foodDetectionZone.detectedObjs.Count > 0) 
         {
@@ -46,34 +49,46 @@ public class Dino : MonoBehaviour
         }  
     }
 
+    void Eat() 
+    {
+        animator.SetBool("isEating", true);
+        animator.SetBool("isJumping", false);
+    }
+
     void NoticeFood() 
     {
+        TurnToChased();
         animator.SetTrigger("noticed");
         animator.SetBool("isJumping", true);
-        TurnToChased();
     }
 
     void TurnToChased() 
     {
-        bool isLookingRight = sr.flipY;
+        bool isLookingRight = sr.flipX;
         var VecToPos = chasedObj.transform.position - this.transform.position;
         bool isFoodRight = VecToPos.x > 0;
         if(isLookingRight != isFoodRight) {
-            sr.flipY = !sr.flipY;
-            isLookingRight = sr.flipY;
+            sr.flipX = !sr.flipX;
+            isLookingRight = sr.flipX;
         }
         if(isLookingRight) {
             jumpVec.x = -jumpVec.x;
         }
     }
 
-    void JumpTo(Vector3 pos) 
+    void JumpTo(Vector3 pos, Action act) 
     {
         jumpTimer += Time.fixedDeltaTime;
-
-        if(jumpTimer > jumpInterval) {
-            rb.AddForce(jumpVec);
-            jumpTimer = 0f;
+        if(jumpTimer < jumpInterval) return;
+        
+        jumpTimer = 0f;
+        
+        var VecToPos = chasedObj.transform.position - this.transform.position;
+        if(VecToPos.magnitude < reachedRadius) {
+            chasedObj = null;
+            act();
+            return;
         }
+        rb.AddForce(jumpVec);
     }
 }
