@@ -44,13 +44,19 @@ public class Dino : MonoBehaviour
         } 
         else if(foodDetectionZone.detectedObjs.Count > 0) 
         {
-            chasedObj = foodDetectionZone.detectedObjs[0].gameObject;
+            chasedObj = foodDetectionZone.detectedObjs[0];
             NoticeFood();
         }  
     }
 
     void Eat() 
     {
+        if(chasedObj.TryGetComponent(out Animator eatAnim)) {
+            eatAnim.SetTrigger("omnomnom");
+        }
+        
+        foodDetectionZone.detectedObjs.Remove(chasedObj);
+        chasedObj = null;
         animator.SetBool("isEating", true);
         animator.SetBool("isJumping", false);
     }
@@ -69,9 +75,7 @@ public class Dino : MonoBehaviour
         bool isFoodRight = VecToPos.x > 0;
         if(isLookingRight != isFoodRight) {
             sr.flipX = !sr.flipX;
-            isLookingRight = sr.flipX;
-        }
-        if(isLookingRight) {
+
             jumpVec.x = -jumpVec.x;
         }
     }
@@ -85,7 +89,6 @@ public class Dino : MonoBehaviour
         
         var VecToPos = chasedObj.transform.position - this.transform.position;
         if(VecToPos.magnitude < reachedRadius) {
-            chasedObj = null;
             act();
             return;
         }

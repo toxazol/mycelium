@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9054277526296044679}
   - component: {fileID: 3807369463576306790}
   - component: {fileID: -8534003878439788}
+  - component: {fileID: 308821483136038688}
   m_Layer: 0
   m_Name: DinoFood1
   m_TagString: food
@@ -142,3 +143,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.12
+--- !u!114 &308821483136038688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476487954668390810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834a895b910059f448292f8f6e2d4abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
         GameObject.Instantiate(dinoFood[i], foodPos, Quaternion.identity);
         plantsCount++;
-        plantBtnText.SetText("Plant(" +plantsCount+ ")");
+        plantBtnText.SetText(plantsCount + "");
     }
 
     public void OnSymbiosis()
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return;
 
         symbiosisTreeIds.Add(treeAboveId, true);
-        symbiosisBtnText.SetText("Symbiosis(" +symbiosisTreeIds.Count+ ")");
+        symbiosisBtnText.SetText(symbiosisTreeIds.Count + "");
     }
 
     private void OnTriggerStay2D(Collider2D other) {

@@ -6,14 +6,14 @@ public class DetectionZone : MonoBehaviour
 {
     [SerializeField] private string targetTag = "food";
 
-    public List<Collider2D> detectedObjs = new();
+    public List<GameObject> detectedObjs = new();
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag != targetTag) return;
-        detectedObjs.Add(other);
+        detectedObjs.Add(other.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        detectedObjs.Remove(other);
+        detectedObjs.Remove(other.gameObject);
     }
 }

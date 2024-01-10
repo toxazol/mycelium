@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tree
   - food
+  - dino
   layers:
   - Default
   - TransparentFX
