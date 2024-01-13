@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,10 +11,10 @@ public class Player : MonoBehaviour
 {
 
     public InputAction move;
-    public InputAction interact;
+    public InputAction mouseMove;
     public InputAction pause;
-    public bool isMoving = false;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1f;
+    public float mouseSensivity = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D moveFilter;
     public GameObject menuUI;
@@ -101,24 +103,33 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void FixedUpdate() {
+        KeyboardMove();
+        MouseMove();
     }
 
-    void FixedUpdate() {
+    void KeyboardMove()
+    {
         var moveAmount = move.ReadValue<Vector2>();
-        if (TryMove(moveAmount)
+        Move(moveAmount);
+    }
+
+    void MouseMove()
+    {
+        if(!Mouse.current.leftButton.isPressed) return;
+
+        var mousePos = mouseMove.ReadValue<Vector2>();
+        var mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
+        var vec = (Vector2)(mousePosWorld - this.transform.position);
+        var moveAmount = vec.normalized * mouseSensivity;
+        Move(moveAmount);
+    }
+
+    bool Move(Vector2 moveAmount)
+    {
+        return TryMove(moveAmount)
             || TryMove(new Vector2(moveAmount.x, 0)) // for player not to get stuck
-            || TryMove(new Vector2(0, moveAmount.y))) // when moving diagonally
-        {
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
+            || TryMove(new Vector2(0, moveAmount.y)); // when moving diagonally
     }
 
     bool TryMove(Vector2 dir, bool checkOnly = false)
@@ -142,13 +153,13 @@ public class Player : MonoBehaviour
     public void OnEnable()
     {
         move.Enable();
-        interact.Enable();
+        mouseMove.Enable();
         pause.Enable();
     }
 
     public void OnDisable()
     {
         move.Disable();
-        interact.Disable();
+        mouseMove.Disable();
     }
 }

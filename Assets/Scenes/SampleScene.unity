@@ -3318,6 +3318,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &486695557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486695558}
+  m_Layer: 5
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &486695558
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486695557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649030968}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &490647320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,14 +3781,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.0011990408
-    y: 0.0019433649
+    y: 0
     width: 0.9976019
-    height: 0.9950028
+    height: 0.9993738
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 1.78125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4992,6 +5027,7 @@ RectTransform:
   m_Children:
   - {fileID: 1575354291}
   - {fileID: 576845195}
+  - {fileID: 486695558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14231,21 +14267,21 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 0
     m_Flags: 0
-  interact:
-    m_Name: Interact
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 7310c375-7cac-48a6-af2e-54ebe483eba9
+  mouseMove:
+    m_Name: Mouse Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4133d00d-90b7-44a1-831e-17194ecc06b5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: c7f37b46-81fa-4a61-928f-f470fb9c0496
-      m_Path: <Keyboard>/space
+      m_Id: e74837f1-3320-4fa4-85c1-4258b68c10a2
+      m_Path: <Mouse>/position
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Interact
+      m_Action: Mouse Move
       m_Flags: 0
     m_Flags: 0
   pause:
@@ -14265,8 +14301,8 @@ MonoBehaviour:
       m_Action: Pause
       m_Flags: 0
     m_Flags: 0
-  isMoving: 0
   moveSpeed: 1
+  mouseSensivity: 1
   collisionOffset: 0.01
   moveFilter:
     useTriggers: 0
