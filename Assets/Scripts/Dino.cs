@@ -80,14 +80,14 @@ public class Dino : MonoBehaviour
         }
     }
 
-    void JumpTo(Vector3 pos, Action act) 
+    void JumpTo(Vector2 pos, Action act) 
     {
         jumpTimer += Time.fixedDeltaTime;
         if(jumpTimer < jumpInterval) return;
         
         jumpTimer = 0f;
         
-        var VecToPos = chasedObj.transform.position - this.transform.position;
+        var VecToPos = pos - (Vector2)this.transform.position;
         if(VecToPos.magnitude < reachedRadius) {
             act();
             return;

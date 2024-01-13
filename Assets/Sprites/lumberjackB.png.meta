@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 07281b94762a7e448824c410f61dca80
+guid: b499a8abeb9e30048924a3f5fdfadd0e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shrooms_0
+      name: lumberjackB_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
-        width: 20
-        height: 20
+        y: 450
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e5a5791d77f12e4999c4ec2589b6f43
-      internalID: 1879211091
+      spriteID: 9475d190dc183084f87b89db6cc35611
+      internalID: 1332897133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrooms_1
+      name: lumberjackB_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 80
-        width: 20
-        height: 20
+        x: 50
+        y: 450
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 223d2c254d15e354ea3068d748af04fd
-      internalID: 1847923548
+      spriteID: aac6e15a86341b74d8bc76b2930965a9
+      internalID: -1657382086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrooms_2
+      name: lumberjackB_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 80
-        width: 20
-        height: 20
+        x: 100
+        y: 450
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3755289f0a177c4dbf3cbffc40e705c
-      internalID: 1979147550
+      spriteID: 1d6950fd342090546a671128be872b4e
+      internalID: -111503605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrooms_3
+      name: lumberjackB_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 60
-        width: 20
-        height: 20
+        x: 150
+        y: 450
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,113 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd7f71834fd8a2c479e25355931e3dd9
-      internalID: -2874401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shrooms_4
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 60
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c7404ce76af85842b9afed5456d0a9f
-      internalID: -865670088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shrooms_5
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 60
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 792c7801c68463e40bbbef8c89b46e32
-      internalID: 347884983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shrooms_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d391450c6d53a054c9d36263fc512ec8
-      internalID: -1359543076
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shrooms_7
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d7df683d12588a40a2b1b62741cc36d
-      internalID: -1571805732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shrooms_8
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16b36e88b29df644b98203df1d62d109
-      internalID: 66692672
+      spriteID: ee224737b0947ca4cb0ec98e356ff280
+      internalID: -1825337518
       vertices: []
       indices: 
       edges: []
@@ -322,15 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      shrooms_0: 1879211091
-      shrooms_1: 1847923548
-      shrooms_2: 1979147550
-      shrooms_3: -2874401
-      shrooms_4: -865670088
-      shrooms_5: 347884983
-      shrooms_6: -1359543076
-      shrooms_7: -1571805732
-      shrooms_8: 66692672
+      lumberjackB_0: 1332897133
+      lumberjackB_1: -1657382086
+      lumberjackB_2: -111503605
+      lumberjackB_3: -1825337518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
