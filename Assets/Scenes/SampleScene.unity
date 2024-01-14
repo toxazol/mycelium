@@ -8111,7 +8111,7 @@ MonoBehaviour:
   maxIdleSec: 10
   curIdleSec: 0
   curDestination: {x: 0, y: 0, z: 0}
-  noticeTimeout: 10
+  noticeTimeout: 7
 --- !u!70 &1004829881
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -14562,7 +14562,8 @@ MonoBehaviour:
   plantBtnText: {fileID: 8838513}
   symbiosisBtnText: {fileID: 971752507}
   dinoFood:
-  - {fileID: 7476487954668390810, guid: e31f4e24218ce85438e8a388e8b7942d, type: 3}
+  - {fileID: 7476487954668390810, guid: 914e59c768aaff44088c4d7f0f10140f, type: 3}
+  - {fileID: 7476487954668390810, guid: 6a0449a42023d7044bf7d7e649b180b8, type: 3}
   foodOffsetUp: 0.15
   treeAboveId: 0
   plantsCount: 0

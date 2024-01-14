@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Eaten1
+  m_Name: Grow2
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,19 +21,19 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 367898542, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - time: 1
-      value: {fileID: -924418428, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - time: 2
-      value: {fileID: -1512806219, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - time: 3
-      value: {fileID: 1685003106, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
+      value: {fileID: 1931359237, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - time: 0.2
+      value: {fileID: 1927531012, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - time: 0.4
+      value: {fileID: -1332317499, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - time: 0.6
+      value: {fileID: 1361121772, guid: c943e5c654527d642a18b27440003c2e, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 1
+  m_SampleRate: 5
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,16 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 367898542, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - {fileID: -924418428, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - {fileID: -1512806219, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
-    - {fileID: 1685003106, guid: 77cc163d1b37bf349af7545f0cacfaac, type: 3}
+    - {fileID: 1931359237, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - {fileID: 1927531012, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - {fileID: -1332317499, guid: c943e5c654527d642a18b27440003c2e, type: 3}
+    - {fileID: 1361121772, guid: c943e5c654527d642a18b27440003c2e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 4
+    m_StopTime: 0.8
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,11 +78,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 3
-    functionName: OnEaten
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
