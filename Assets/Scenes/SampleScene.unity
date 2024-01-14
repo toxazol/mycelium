@@ -16802,8 +16802,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -49.898594, y: 0.7846106}
-  - {x: -50.027485, y: -9.731804}
-  - {x: 29.862017, y: -10.027742}
+  - {x: -49.899536, y: -5.2625055}
+  - {x: 30.036139, y: -5.197134}
   - {x: 30.069008, y: 20.031588}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -17724,15 +17724,15 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5372549, g: 0.5176471, b: 0.62352943, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.38039216, g: 0.5043146, b: 0.83137256, a: 0.24313726}
+      key1: {r: 0.52425873, g: 1, b: 0.96828395, a: 0.7764706}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 39321
+      ctime0: 26600
       ctime1: 65535
       ctime2: 0
       ctime3: 0
@@ -17748,7 +17748,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 2
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
