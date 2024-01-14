@@ -14,6 +14,7 @@ public class LumberJack : MonoBehaviour
     public float curIdleSec;
     public Vector3 curDestination;
     public float noticeTimeout = 3f;
+    public GameStateManager gameStateManager;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -64,6 +65,7 @@ public class LumberJack : MonoBehaviour
         if(curNoticeTimer < noticeTimeout) return true; 
 
         animator.SetBool("isDetect", true);
+        gameStateManager.OnLose();
 
         return true;
     }
