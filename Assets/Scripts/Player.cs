@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
     void MouseMove()
     {
         if(!Mouse.current.leftButton.isPressed) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
         var mousePos = mouseMove.ReadValue<Vector2>();
         var mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);

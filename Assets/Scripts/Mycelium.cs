@@ -21,6 +21,7 @@ public class Mycelium : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        // lineRenderer.SetPosition(0, transform.position);
         if(branchDepth == 0) { // main branch
             player = GameObject.FindObjectOfType<Player>();
             segLenSq = segLen * segLen;

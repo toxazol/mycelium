@@ -12,15 +12,16 @@ public class LumberJack : MonoBehaviour
     public int minIdleSec = 1;
     public int maxIdleSec = 10;
     public float curIdleSec;
-    public float curRunDistance;
     public Vector3 curDestination;
-    public bool isCurRunLeft;
+    public float noticeTimeout = 3f;
 
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private bool isCurRunLeft;
     private float jumpTimer = 0f;
     private float curIdleTimer = 0f;
+    private float curNoticeTimer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,9 @@ public class LumberJack : MonoBehaviour
 
     void FixedUpdate() 
     {
-        curIdleTimer += Time.deltaTime;
+        if(CheckDino()) return;
+
+        curIdleTimer += Time.fixedDeltaTime;
         if(curIdleTimer < curIdleSec) return;
 
         animator.SetBool("isRun", true);
@@ -48,12 +51,29 @@ public class LumberJack : MonoBehaviour
         JumpTo(curDestination, RandomizeBehavior);
     }
 
+    bool CheckDino()
+    {
+        if(dinoDetectionZone.detectedObjs.Count == 0) {
+            animator.SetBool("isNotice", false);
+            return false;
+        }
+
+        animator.SetBool("isNotice", true);
+        curNoticeTimer += Time.fixedDeltaTime;
+
+        if(curNoticeTimer < noticeTimeout) return true; 
+
+        animator.SetBool("isDetect", true);
+
+        return true;
+    }
+
     void RandomizeBehavior()
     {
         curIdleTimer = 0f;
         animator.SetBool("isRun", false);
         curIdleSec = UnityEngine.Random.Range(minIdleSec, maxIdleSec);
-        curRunDistance = UnityEngine.Random.Range(minRunDistance, maxRunDistance);
+        float curRunDistance = UnityEngine.Random.Range(minRunDistance, maxRunDistance);
         isCurRunLeft = UnityEngine.Random.value > 0.5f;
         curRunDistance *= isCurRunLeft ? -1 : 1;
         curDestination = new Vector3(this.transform.position.x + curRunDistance, 0, 0);
