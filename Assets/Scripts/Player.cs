@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -19,16 +20,20 @@ public class Player : MonoBehaviour
     public float collisionOffset = 0.05f;
     public ContactFilter2D moveFilter;
     public GameObject menuUI;
-    public TextMeshProUGUI plantBtnText;
-    public TextMeshProUGUI symbiosisBtnText;
-    private bool isPaused = false; 
-    private Rigidbody2D rb;
+    public TextMeshProUGUI growBtnCounter;
+    public TextMeshProUGUI symbiosisBtnCounter;
+    public GameObject growBtn;
+    public GameObject symbiosisBtn;
     public List<RaycastHit2D> castCollisions = new();
     public List<GameObject> dinoFood;
     public float foodOffsetUp = 0.1f;
     public int treeAboveId = 0;
-    public int plantsCount = 0;
-    Dictionary<int, bool> symbiosisTreeIds = new(); // treeId -> isAvailable
+    public int shroomsCount = 0;
+
+    private bool isGrowAvailable = false;
+    private bool isPaused = false; 
+    private Rigidbody2D rb;
+    private Dictionary<int, bool> symbiosisTreeIds = new(); // treeId -> isAvailable
     
 
     public void Awake()
@@ -52,8 +57,7 @@ public class Player : MonoBehaviour
 
     public void OnGrow()
     {
-        if(TryMove(Vector2.up, true)) return; // not colliding with surface
-        if(symbiosisTreeIds.Count == 0) return;
+        if(!isGrowAvailable) return;
 
         bool isTreeAvailable = false;
         List<int> keys = new List<int>(symbiosisTreeIds.Keys);
@@ -73,8 +77,8 @@ public class Player : MonoBehaviour
             this.transform.position.z);
 
         GameObject.Instantiate(dinoFood[i], foodPos, Quaternion.identity);
-        plantsCount++;
-        plantBtnText.SetText(plantsCount + "");
+        shroomsCount++;
+        growBtnCounter.SetText(shroomsCount + "");
     }
 
     public void OnSymbiosis()
@@ -83,18 +87,23 @@ public class Player : MonoBehaviour
         if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return;
 
         symbiosisTreeIds.Add(treeAboveId, true);
-        symbiosisBtnText.SetText(symbiosisTreeIds.Count + "");
+        symbiosisBtnCounter.SetText(symbiosisTreeIds.Count + "");
+        symbiosisBtn.GetComponent<Button>().interactable = false;
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "tree") {
             treeAboveId = other.gameObject.GetInstanceID();
+
+            if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return; // tree not available
+            symbiosisBtn.GetComponent<Button>().interactable = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag == "tree") {
             treeAboveId = 0;
+            symbiosisBtn.GetComponent<Button>().interactable = false;
         }
     }
     
@@ -112,6 +121,7 @@ public class Player : MonoBehaviour
     void KeyboardMove()
     {
         var moveAmount = move.ReadValue<Vector2>();
+        if(moveAmount == Vector2.zero) return;
         Move(moveAmount);
     }
 
@@ -129,9 +139,31 @@ public class Player : MonoBehaviour
 
     bool Move(Vector2 moveAmount)
     {
+        UpdateGrowAvailability();
         return TryMove(moveAmount)
             || TryMove(new Vector2(moveAmount.x, 0)) // for player not to get stuck
             || TryMove(new Vector2(0, moveAmount.y)); // when moving diagonally
+    }
+
+    void UpdateGrowAvailability()
+    {
+        isGrowAvailable = false;
+        growBtn.GetComponent<Button>().interactable = false;
+
+        if(TryMove(Vector2.up, true)) return; // not colliding with surface
+        if(symbiosisTreeIds.Count == 0) return;
+
+        bool isTreeAvailable = false;
+        foreach(var symb in symbiosisTreeIds) {
+            if(!symb.Value) continue; // is not available
+
+            isTreeAvailable = true;
+            break;
+        }
+        if(!isTreeAvailable) return;
+
+        isGrowAvailable = true;
+        growBtn.GetComponent<Button>().interactable = true;
     }
 
     bool TryMove(Vector2 dir, bool checkOnly = false)
