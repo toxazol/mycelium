@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     public float foodOffsetUp = 0.1f;
     public int treeAboveId = 0;
     public int shroomsCount = 0;
+    public GameObject storyDialog;
+    public TextMeshProUGUI storyText;
 
     private bool isGrowAvailable = false;
     private bool isPaused = false; 
@@ -97,6 +99,12 @@ public class Player : MonoBehaviour
 
             if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return; // tree not available
             symbiosisBtn.GetComponent<Button>().interactable = true;
+            return;
+        }
+        if(other.gameObject.tag == "story") {
+            storyText.SetText(other.gameObject.GetComponent<StoryText>().text);
+            storyDialog.SetActive(true);
+            return;
         }
     }
 
@@ -104,6 +112,12 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag == "tree") {
             treeAboveId = 0;
             symbiosisBtn.GetComponent<Button>().interactable = false;
+            return;
+        }
+        if(other.gameObject.tag == "story") {
+            storyDialog.SetActive(false);
+            other.gameObject.SetActive(false);
+            return;
         }
     }
     
