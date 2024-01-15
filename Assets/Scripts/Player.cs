@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -31,6 +32,9 @@ public class Player : MonoBehaviour
     public int shroomsCount = 0;
     public GameObject storyDialog;
     public TextMeshProUGUI storyText;
+    public Light2D dinoVision;
+    public float dinoVisionTargetIntensity = 1.7f;
+    public float dinoVisionTimeout = 1f;
 
     private bool isGrowAvailable = false;
     private bool isPaused = false; 
@@ -94,14 +98,14 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag == "tree") {
+        if(other.gameObject.CompareTag("tree")) {
             treeAboveId = other.gameObject.GetInstanceID();
 
             if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return; // tree not available
             symbiosisBtn.GetComponent<Button>().interactable = true;
             return;
         }
-        if(other.gameObject.tag == "story") {
+        if(other.gameObject.CompareTag("story")) {
             storyText.SetText(other.gameObject.GetComponent<StoryText>().text);
             storyDialog.SetActive(true);
             return;
@@ -161,8 +165,7 @@ public class Player : MonoBehaviour
 
     void UpdateGrowAvailability()
     {
-        isGrowAvailable = false;
-        growBtn.GetComponent<Button>().interactable = false;
+        ToggleGrowHints(false);
 
         if(TryMove(Vector2.up, true)) return; // not colliding with surface
         if(symbiosisTreeIds.Count == 0) return;
@@ -176,8 +179,24 @@ public class Player : MonoBehaviour
         }
         if(!isTreeAvailable) return;
 
-        isGrowAvailable = true;
-        growBtn.GetComponent<Button>().interactable = true;
+        ToggleGrowHints(true);
+    }
+
+    void ToggleGrowHints(bool state)
+    {
+        isGrowAvailable = state;
+        growBtn.GetComponent<Button>().interactable = state;
+        if(state) {
+            StartCoroutine(DinoVisionFade(true));
+        } else {
+            StartCoroutine(DinoVisionFade(false));
+        }
+    }
+
+    IEnumerator DinoVisionFade(bool isIn)
+    {
+        yield return new WaitForSeconds(dinoVisionTimeout);
+        dinoVision.intensity = isIn ? dinoVisionTargetIntensity : 1;
     }
 
     bool TryMove(Vector2 dir, bool checkOnly = false)

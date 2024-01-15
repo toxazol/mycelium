@@ -69,3 +69,6 @@ TagManager:
   - name: Characters
     uniqueID: 3990987365
     locked: 0
+  - name: Vignette
+    uniqueID: 2331333249
+    locked: 0
