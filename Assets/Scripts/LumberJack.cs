@@ -6,15 +6,14 @@ public class LumberJack : MonoBehaviour
 {
     public Vector2 jumpVec;
     public float jumpInterval; 
-    public DetectionZone dinoDetectionZone;
-    public float minRunDistance = 1f;
-    public float maxRunDistance = 4f;
+    public DetectionZoneRay dinoDetectionZone;
     public int minIdleSec = 1;
     public int maxIdleSec = 10;
     public float curIdleSec;
     public Vector3 curDestination;
     public float noticeTimeout = 3f;
     public GameStateManager gameStateManager;
+    public BoxCollider2D patrolZone;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -31,7 +30,6 @@ public class LumberJack : MonoBehaviour
         animator = GetComponent<Animator>();
 
         RandomizeBehavior();
-
     }
 
     // Update is called once per frame
@@ -75,10 +73,10 @@ public class LumberJack : MonoBehaviour
         curIdleTimer = 0f;
         animator.SetBool("isRun", false);
         curIdleSec = UnityEngine.Random.Range(minIdleSec, maxIdleSec);
-        float curRunDistance = UnityEngine.Random.Range(minRunDistance, maxRunDistance);
-        isCurRunLeft = UnityEngine.Random.value > 0.5f;
-        curRunDistance *= isCurRunLeft ? -1 : 1;
-        curDestination = new Vector3(this.transform.position.x + curRunDistance, 0, 0);
+        float curRandX = UnityEngine.Random.Range(patrolZone.bounds.min.x, patrolZone.bounds.max.x);
+    
+        isCurRunLeft = curRandX - transform.position.x < 0;
+        curDestination = new Vector3(curRandX, 0, 0);
         
         if(isCurRunLeft != sr.flipX) { // looks right by default
             sr.flipX = !sr.flipX;
@@ -94,8 +92,7 @@ public class LumberJack : MonoBehaviour
         jumpTimer = 0f;
         
         bool isLeftOfPos = transform.position.x < pos.x;
-        if(isCurRunLeft == isLeftOfPos) // (isCurRunLeft && isLeftOfPos) || (!isCurRunLeft && !isLeftOfPos)
-        {
+        if(isCurRunLeft == isLeftOfPos) {
             act();
             return;
         }
