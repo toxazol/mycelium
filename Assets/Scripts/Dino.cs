@@ -8,8 +8,10 @@ public class Dino : MonoBehaviour
     public Vector2 jumpVec;
     public float jumpInterval; 
     public DetectionZone foodDetectionZone;
+    public DetectionZone sleepDetectionZone;
     public GameObject chasedObj;
     public float reachedRadius = 0.3f;
+    public GameStateManager gameStateManager;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -33,20 +35,27 @@ public class Dino : MonoBehaviour
     void FixedUpdate() 
     {
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attention")
-            || animator.GetBool("isEating"))
+            || animator.GetBool("isEating") || animator.GetBool("isSleeping"))
         {
-            // wait for dino to notice or to eat
+            // wait for dino to notice or to eat or to sleep
             return;
         }
         if(chasedObj) 
         {
-            JumpTo(chasedObj.transform.position, Eat);
+            JumpTo(
+                chasedObj.transform.position, 
+                chasedObj.CompareTag(foodDetectionZone.targetTag) ? Eat : Sleep);
+        }
+        else if(sleepDetectionZone.detectedObjs.Count > 0) 
+        {
+            chasedObj = sleepDetectionZone.detectedObjs[0];
+            Notice();
         } 
         else if(foodDetectionZone.detectedObjs.Count > 0) 
         {
             chasedObj = foodDetectionZone.detectedObjs[0];
-            NoticeFood();
-        }  
+            Notice();
+        }
     }
 
     void Eat() 
@@ -60,8 +69,16 @@ public class Dino : MonoBehaviour
         animator.SetBool("isEating", true);
         animator.SetBool("isJumping", false);
     }
+    void Sleep() 
+    {
+        sleepDetectionZone.detectedObjs.Remove(chasedObj);
+        chasedObj = null;
+        animator.SetBool("isSleeping", true);
+        animator.SetBool("isJumping", false);
+        gameStateManager.OnWin();
+    }
 
-    void NoticeFood() 
+    void Notice() 
     {
         TurnToChased();
         animator.SetTrigger("noticed");

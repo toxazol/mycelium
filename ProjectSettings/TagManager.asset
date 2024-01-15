@@ -8,6 +8,7 @@ TagManager:
   - food
   - dino
   - story
+  - finish
   layers:
   - Default
   - TransparentFX

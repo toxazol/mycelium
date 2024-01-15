@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
-    [SerializeField] private string targetTag = "food";
+    public string targetTag = "food";
 
     public List<GameObject> detectedObjs = new();
 
