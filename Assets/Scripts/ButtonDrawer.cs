@@ -47,7 +47,6 @@ public class ButtonDrawer : MonoBehaviour
 
     void Update()
     {   
-         // x: -405
 
         if(!isShow && !isHide) return;
         timer += Time.deltaTime;

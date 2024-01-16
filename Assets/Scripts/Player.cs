@@ -145,7 +145,9 @@ public class Player : MonoBehaviour
 
     void MouseMove()
     {
-        if(!Mouse.current.leftButton.isPressed) return;
+        if(!Mouse.current.leftButton.isPressed 
+        && (Touchscreen.current == null || !Touchscreen.current.IsPressed())) return;
+        
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         var mousePos = mouseMove.ReadValue<Vector2>();

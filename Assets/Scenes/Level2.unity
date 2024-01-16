@@ -7996,7 +7996,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 2ada3c45e8046204e9a1d77a1d5c61b4, type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -8078,7 +8078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36.99, y: -246.1}
+  m_AnchoredPosition: {x: -30, y: -246}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404181565
@@ -8095,7 +8095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   fillStep: 0.05
-  moveStep: 11.5
+  moveStep: 12
   isShow: 0
   isHide: 0
 --- !u!1 &404477334
@@ -41617,7 +41617,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 4a0e6815d3741b34ba799fa42d7b1fcf, type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -41628,7 +41628,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1282328156}
+  m_TargetGraphic: {fileID: 1780785616}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
