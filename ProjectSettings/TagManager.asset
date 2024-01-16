@@ -9,6 +9,7 @@ TagManager:
   - dino
   - story
   - finish
+  - enemy
   layers:
   - Default
   - TransparentFX

@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
         symbiosisTreeIds.Add(treeAboveId, true);
         symbiosisBtnCounter.SetText(symbiosisTreeIds.Count + "");
-        symbiosisBtn.GetComponent<Button>().interactable = false;
+        symbiosisBtn.GetComponent<ButtonDrawer>().Hide();
     }
 
     private void OnTriggerStay2D(Collider2D other) {
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
             treeAboveId = other.gameObject.GetInstanceID();
 
             if(symbiosisTreeIds.TryGetValue(treeAboveId, out _)) return; // tree not available
-            symbiosisBtn.GetComponent<Button>().interactable = true;
+            symbiosisBtn.GetComponent<ButtonDrawer>().Show();
             return;
         }
         if(other.gameObject.CompareTag("story")) {
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag == "tree") {
             treeAboveId = 0;
-            symbiosisBtn.GetComponent<Button>().interactable = false;
+            symbiosisBtn.GetComponent<ButtonDrawer>().Hide();
             return;
         }
         if(other.gameObject.tag == "story") {
@@ -185,10 +185,11 @@ public class Player : MonoBehaviour
     void ToggleGrowHints(bool state)
     {
         isGrowAvailable = state;
-        growBtn.GetComponent<Button>().interactable = state;
         if(state) {
+            growBtn.GetComponent<ButtonDrawer>().Show();
             StartCoroutine(DinoVisionFade(true));
         } else {
+            growBtn.GetComponent<ButtonDrawer>().Hide();
             StartCoroutine(DinoVisionFade(false));
         }
     }
