@@ -6754,9 +6754,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -81.30005, y: -216}
+  m_AnchoredPosition: {x: -132.30005, y: -216}
   m_SizeDelta: {x: 170, y: 220}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &352426439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8078,9 +8078,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30, y: -246}
+  m_AnchoredPosition: {x: 60, y: -246}
   m_SizeDelta: {x: 300, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &404181565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8094,10 +8094,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  fillStep: 0.05
-  moveStep: 12
+  fillStep: 0.03
+  moveStep: 7
   isShow: 0
   isHide: 0
+  counter: {fileID: 352426438}
 --- !u!1 &404477334
 GameObject:
   m_ObjectHideFlags: 0
@@ -10980,14 +10981,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.0034482758
     width: 1
-    height: 1
+    height: 0.99310344
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 1.40625
+  orthographic size: 1.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -40816,7 +40817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 64
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -41699,9 +41700,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -146.03, y: -122.49997}
+  m_AnchoredPosition: {x: -11.029846, y: -122.5}
   m_SizeDelta: {x: 450, y: 110}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1780785620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41715,10 +41716,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  fillStep: 0.05
-  moveStep: 16
+  fillStep: 0.03
+  moveStep: 7
   isShow: 0
   isHide: 0
+  counter: {fileID: 1828901654}
 --- !u!1 &1783153923
 GameObject:
   m_ObjectHideFlags: 0
@@ -44030,9 +44032,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -233.90009, y: -92.599976}
+  m_AnchoredPosition: {x: -281.9001, y: -92.599976}
   m_SizeDelta: {x: 160, y: 230}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1828901655
 MonoBehaviour:
   m_ObjectHideFlags: 0
