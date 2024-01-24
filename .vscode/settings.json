@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MyCelium.sln"
+    "dotnet.defaultSolution": "MyCelium.sln",
+    "dotnet.preferCSharpExtension": true
 }

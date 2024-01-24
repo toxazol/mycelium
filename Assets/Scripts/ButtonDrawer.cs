@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonDrawer : MonoBehaviour
 {
-    public float moveStep = 0.001f;
+    public float speed = 1f;
     public bool isShowing = false;
     public bool isHiding = false;
     public RectTransform counter;
+    public float curProgress = 0;
 
     Image img;
-    float timer;
-    float initFill;
     Vector2 initPos;
     float cliffX;
     float initDist;
+    float initFill;
+    RectTransform rect;
     
 
     void Start()
     {
         img = GetComponent<Image>();
-        initFill = img.fillAmount;
-        initPos = GetComponent<RectTransform>().anchoredPosition;
-        cliffX = counter.anchoredPosition.x;
+        rect = GetComponent<RectTransform>();
 
+        initFill = img.fillAmount;
+        initPos = rect.anchoredPosition;
+        cliffX = counter.anchoredPosition.x;
         initDist = Mathf.Abs(initPos.x - cliffX); 
     }
 
@@ -33,7 +36,6 @@ public class ButtonDrawer : MonoBehaviour
     {
         isShowing = true;
         isHiding = false;
-        timer = 0f;
     }
 
     [ContextMenu("Hide")]
@@ -41,37 +43,36 @@ public class ButtonDrawer : MonoBehaviour
     {
         isHiding = true;
         isShowing = false;
-        timer = 0f;
     }
-
-
 
     void Update()
     {   
 
         if(!isShowing && !isHiding) return;
-        // dist = init - curProgress*init
-        var btnRight = GetComponent<RectTransform>().anchoredPosition.x;
 
-        if(isShowing && btnRight < cliffX) { // && img.fillAmount + fillStep > 1f
-            GetComponent<RectTransform>().anchoredPosition.Set(cliffX, initPos.y);
+        float sign = isShowing ? 1 : -1;
+        curProgress += sign * speed * Time.deltaTime;
+
+        if(isShowing && curProgress > 1f) { 
+            curProgress = 1f;
             img.fillAmount = 1f;
+            rect.anchoredPosition.Set(cliffX, initPos.y);
             isShowing = false;
             return;
         }
-        if(isHiding && btnRight >= initPos.x) { // && img.fillAmount - fillStep < initFill
-            GetComponent<RectTransform>().anchoredPosition = initPos;
+        if(isHiding && curProgress < 0f) { 
+            curProgress = 0f;
             img.fillAmount = initFill;
+            rect.anchoredPosition = initPos;
             isHiding = false;
             return;
         }
+        
+        img.fillAmount = curProgress * (1f - initFill) + initFill;
+        float dist = (1 - curProgress) * initDist;
+        float btnRight = cliffX + dist;
 
-        var dist = Mathf.Abs(btnRight - cliffX);
-
-        var curProgress = (initDist - dist)/initDist;
-
-        float sign = isShowing ? 1 : -1;
-        img.fillAmount = curProgress;
-        this.transform.Translate(new Vector3(-moveStep * sign, 0f, 0f));
+        var tmp = rect.anchoredPosition;
+        rect.anchoredPosition = new Vector2(btnRight, tmp.y);
     }
 }
