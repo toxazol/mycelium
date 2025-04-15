@@ -2,10 +2,11 @@
 A submission to [Clover Jam 2024](https://itch.io/jam/clover-jam-5).\
 The game got 1st place out of 8 entries.
 
-I did all the programming.
+I did all the programming.\
+[tenori-nori](https://github.com/tenori-nori) did the art, text and level design.
 
-Screenshot:\
-![myCeliumScreenshot](https://github.com/user-attachments/assets/a1640222-7114-46e2-b724-7df0ee6bc542)
+You can play a web version of the game [here](https://toxazol.itch.io/mycelium).\
+The game also supports touch controls and can be played from a mobile device.
 
 Gameplay demonstration:
 
