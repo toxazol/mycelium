@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class ButtonDrawer : MonoBehaviour
 {
-    public float speed = 1f;
-    public float fillStep = 0.01f;
-    public float moveStep = 0.01f;
-    public bool isShow = false;
-    public bool isHide = false;
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float fillStep = 0.01f;
+    [SerializeField] private float moveStep = 0.01f;
+    [SerializeField] private bool isShow = false;
+    [SerializeField] private bool isHide = false;
 
-    Button btn;
-    Image img;
-    float step;
-    float timer;
-    float initFill;
+    private Button btn;
+    private Image img;
+    private float step;
+    private float timer;
+    private float initFill;
     
 
     void Start()
@@ -42,8 +42,6 @@ public class ButtonDrawer : MonoBehaviour
         step = 1/speed;
         timer = 0f;
     }
-
-
 
     void Update()
     {   

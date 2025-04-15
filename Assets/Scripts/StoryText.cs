@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class StoryText : MonoBehaviour
 {
-    public string text;
+    [field: SerializeField, TextArea] public string Text {get; private set;}
 }

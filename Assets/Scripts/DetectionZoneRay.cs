@@ -7,7 +7,7 @@ public class DetectionZoneRay : MonoBehaviour
     [SerializeField] private string targetTag = "dino";
     [SerializeField] private LayerMask ignoreLayers;
 
-    public List<GameObject> detectedObjs = new();
+    [field: SerializeField] public List<GameObject> DetectedObjs {get; private set;} = new();
 
     private void OnTriggerStay2D(Collider2D other) {
         if(!other.gameObject.CompareTag(targetTag)) return;
@@ -18,15 +18,15 @@ public class DetectionZoneRay : MonoBehaviour
             Mathf.Infinity, ~ignoreLayers);
             
         if (!hit.collider.gameObject.CompareTag(targetTag)) {
-            if(!detectedObjs.Contains(other.gameObject)) return;
-            detectedObjs.Remove(other.gameObject);
+            if(!DetectedObjs.Contains(other.gameObject)) return;
+            DetectedObjs.Remove(other.gameObject);
         }
 
-        if(detectedObjs.Contains(other.gameObject)) return;
-        detectedObjs.Add(other.gameObject);
+        if(DetectedObjs.Contains(other.gameObject)) return;
+        DetectedObjs.Add(other.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        detectedObjs.Remove(other.gameObject);
+        DetectedObjs.Remove(other.gameObject);
     }
 }

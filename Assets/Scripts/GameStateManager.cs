@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject winScreen;
-    public GameObject loseScreen;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject loseScreen;
 
     public void OnWin()
     {

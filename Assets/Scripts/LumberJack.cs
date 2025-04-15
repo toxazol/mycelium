@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LumberJack : MonoBehaviour
 {
-    public Vector2 jumpVec;
-    public float jumpInterval; 
-    public DetectionZoneRay dinoDetectionZone;
-    public int minIdleSec = 1;
-    public int maxIdleSec = 10;
-    public float curIdleSec;
-    public Vector3 curDestination;
-    public float noticeTimeout = 3f;
-    public GameStateManager gameStateManager;
-    public BoxCollider2D patrolZone;
+    [SerializeField] private Vector2 jumpVec;
+    [SerializeField] private float jumpInterval; 
+    [SerializeField] private DetectionZoneRay dinoDetectionZone;
+    [SerializeField] private int minIdleSec = 1;
+    [SerializeField] private int maxIdleSec = 10;
+    [SerializeField] private float curIdleSec;
+    [SerializeField] private Vector3 curDestination;
+    [SerializeField] private float noticeTimeout = 3f;
+    [SerializeField] private GameStateManager gameStateManager;
+    [SerializeField] private BoxCollider2D patrolZone;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -52,7 +52,7 @@ public class LumberJack : MonoBehaviour
 
     bool CheckDino()
     {
-        if(dinoDetectionZone.detectedObjs.Count == 0) {
+        if(dinoDetectionZone.DetectedObjs.Count == 0) {
             animator.SetBool("isNotice", false);
             return false;
         }

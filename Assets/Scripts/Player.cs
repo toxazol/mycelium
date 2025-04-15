@@ -13,28 +13,28 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
-    public InputAction move;
-    public InputAction mouseMove;
-    public InputAction pause;
-    public float moveSpeed = 1f;
-    public float mouseSensivity = 1f;
-    public float collisionOffset = 0.05f;
-    public ContactFilter2D moveFilter;
-    public GameObject menuUI;
-    public TextMeshProUGUI growBtnCounter;
-    public TextMeshProUGUI symbiosisBtnCounter;
-    public GameObject growBtn;
-    public GameObject symbiosisBtn;
-    public List<RaycastHit2D> castCollisions = new();
-    public List<GameObject> dinoFood;
-    public float foodOffsetUp = 0.1f;
-    public int treeAboveId = 0;
-    public int shroomsCount = 0;
-    public GameObject storyDialog;
-    public TextMeshProUGUI storyText;
-    public Light2D dinoVision;
-    public float dinoVisionTargetIntensity = 1.7f;
-    public float dinoVisionTimeout = 1f;
+    [SerializeField] private InputAction move;
+    [SerializeField] private InputAction mouseMove;
+    [SerializeField] private InputAction pause;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float mouseSensivity = 1f;
+    [SerializeField] private float collisionOffset = 0.05f;
+    [SerializeField] private ContactFilter2D moveFilter;
+    [SerializeField] private GameObject menuUI;
+    [SerializeField] private TextMeshProUGUI growBtnCounter;
+    [SerializeField] private TextMeshProUGUI symbiosisBtnCounter;
+    [SerializeField] private GameObject growBtn;
+    [SerializeField] private GameObject symbiosisBtn;
+    [SerializeField] private List<RaycastHit2D> castCollisions = new();
+    [SerializeField] private List<GameObject> dinoFood;
+    [SerializeField] private float foodOffsetUp = 0.1f;
+    [SerializeField] private int treeAboveId = 0;
+    [SerializeField] private int shroomsCount = 0;
+    [SerializeField] private GameObject storyDialog;
+    [SerializeField] private TextMeshProUGUI storyText;
+    [SerializeField] private Light2D dinoVision;
+    [SerializeField] private float dinoVisionTargetIntensity = 1.7f;
+    [SerializeField] private float dinoVisionTimeout = 1f;
 
     private bool isGrowAvailable = false;
     private bool isPaused = false; 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
             return;
         }
         if(other.gameObject.CompareTag("story")) {
-            storyText.SetText(other.gameObject.GetComponent<StoryText>().text);
+            storyText.SetText(other.gameObject.GetComponent<StoryText>().Text);
             storyDialog.SetActive(true);
             return;
         }

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
-    public string targetTag = "food";
+    [field: SerializeField] public string TargetTag {get; private set;} = "food";
 
-    public List<GameObject> detectedObjs = new();
+    [field: SerializeField] public List<GameObject> DetectedObjs {get; private set;} = new();
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag != targetTag) return;
-        detectedObjs.Add(other.gameObject);
+        if(!other.gameObject.CompareTag(TargetTag)) return;
+        DetectedObjs.Add(other.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        detectedObjs.Remove(other.gameObject);
+        DetectedObjs.Remove(other.gameObject);
     }
 }

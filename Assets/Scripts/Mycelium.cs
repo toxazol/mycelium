@@ -2,28 +2,26 @@ using UnityEngine;
 
 public class Mycelium : MonoBehaviour
 {
-    public float segLen = 0.1F;
-    public float wiggleRangeRad = 1.5f; // +/- 90 deg
-    public float branchProb = 0.03f;
-    public int branchPointLimit = 50;
-    public int maxRelationDepth = 4;
-    public Vector3 dir = Vector2.down;
-    public int branchDepth = 0;
-    public float growInterval = 0.1f;
-    public float widthMul = 0.8f;
+    [SerializeField] private float segLen = 0.07f;
+    [SerializeField] private float wiggleRangeRad = 1f; // +/- 90 deg
+    [SerializeField] private float branchProb = 0.3f;
+    [SerializeField] private int branchPointLimit = 5;
+    [SerializeField] private int maxRelationDepth = 3;
+    [SerializeField] private Vector3 dir = Vector2.down;
+    [SerializeField] private int branchDepth = 0;
+    [SerializeField] private float growInterval = 0.05f;
+    [SerializeField] private float widthMul = 0.9f;
 
-    LineRenderer lineRenderer;
-    float timeSinceLastGrow;
-    Player player;
-
-    float segLenSq;
+    private LineRenderer lineRenderer;
+    private float timeSinceLastGrow;
+    private Player player;
+    private float segLenSq;
     
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        // lineRenderer.SetPosition(0, transform.position);
         if(branchDepth == 0) { // main branch
-            player = GameObject.FindObjectOfType<Player>();
+            player = FindFirstObjectByType<Player>();
             segLenSq = segLen * segLen;
         }
     }
@@ -78,7 +76,6 @@ public class Mycelium : MonoBehaviour
         branchLine.SetPosition(branchLine.positionCount++,  GetLastPos());
         branchLine.material = lineRenderer.material;
         branchLine.colorGradient = lineRenderer.colorGradient;
-        // branchScript.dir = Wiggle(dir, wiggleRange*2); // wiggle some more when branch
         branchScript.branchDepth = branchDepth + 1;
     
     }
@@ -102,7 +99,12 @@ public class Mycelium : MonoBehaviour
         System.Type type = original.GetType();
         Component copy = destination.AddComponent(type);
         // Copied fields can be restricted with BindingFlags
-        System.Reflection.FieldInfo[] fields = type.GetFields(); 
+        System.Reflection.FieldInfo[] fields = type.GetFields(
+            System.Reflection.BindingFlags.Instance |
+            System.Reflection.BindingFlags.NonPublic |
+            System.Reflection.BindingFlags.Public |
+            System.Reflection.BindingFlags.DeclaredOnly
+        ); 
         foreach (System.Reflection.FieldInfo field in fields)
         {
             field.SetValue(copy, field.GetValue(original));

@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Dino : MonoBehaviour
 {
-    public Vector2 jumpVec;
-    public float jumpInterval; 
-    public DetectionZone foodDetectionZone;
-    public DetectionZone sleepDetectionZone;
-    public GameObject chasedObj;
-    public float reachedRadius = 0.3f;
-    public GameStateManager gameStateManager;
+    [SerializeField] private Vector2 jumpVec;
+    [SerializeField] private float jumpInterval; 
+    [SerializeField] private DetectionZone foodDetectionZone;
+    [SerializeField] private DetectionZone sleepDetectionZone;
+    [SerializeField] private GameObject chasedObj;
+    [SerializeField] private float reachedRadius = 0.3f;
+    [SerializeField] private GameStateManager gameStateManager;
 
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private float jumpTimer = 0f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -44,16 +45,16 @@ public class Dino : MonoBehaviour
         {
             JumpTo(
                 chasedObj.transform.position, 
-                chasedObj.CompareTag(foodDetectionZone.targetTag) ? Eat : Sleep);
+                chasedObj.CompareTag(foodDetectionZone.TargetTag) ? Eat : Sleep);
         }
-        else if(sleepDetectionZone.detectedObjs.Count > 0) 
+        else if(sleepDetectionZone.DetectedObjs.Count > 0) 
         {
-            chasedObj = sleepDetectionZone.detectedObjs[0];
+            chasedObj = sleepDetectionZone.DetectedObjs[0];
             Notice();
         } 
-        else if(foodDetectionZone.detectedObjs.Count > 0) 
+        else if(foodDetectionZone.DetectedObjs.Count > 0) 
         {
-            chasedObj = foodDetectionZone.detectedObjs[0];
+            chasedObj = foodDetectionZone.DetectedObjs[0];
             Notice();
         }
     }
@@ -64,14 +65,14 @@ public class Dino : MonoBehaviour
             eatAnim.SetTrigger("omnomnom");
         }
         
-        foodDetectionZone.detectedObjs.Remove(chasedObj);
+        foodDetectionZone.DetectedObjs.Remove(chasedObj);
         chasedObj = null;
         animator.SetBool("isEating", true);
         animator.SetBool("isJumping", false);
     }
     void Sleep() 
     {
-        sleepDetectionZone.detectedObjs.Remove(chasedObj);
+        sleepDetectionZone.DetectedObjs.Remove(chasedObj);
         chasedObj = null;
         animator.SetBool("isSleeping", true);
         animator.SetBool("isJumping", false);
